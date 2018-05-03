@@ -17,6 +17,8 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setExtendedState(MAXIMIZED_BOTH);
 		jPanelGame = new JPanelGame();
+		jPanelGame.setFocusable(true);
+		jPanelGame.addKeyListener(controller);
 		add(jPanelGame, BorderLayout.CENTER);
 		setVisible(true);
 	}
