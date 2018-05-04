@@ -31,7 +31,7 @@ public class JPanelGame extends JPanel {
 	public void paint(Graphics g) {
 		removeAll();
 		super.paint(g);
-		g.drawImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage(), player.getPositionX(), player.getPositionY(), 40, 40, this);
+		g.drawImage(new ImageIcon(getClass().getResource("/img/persona.png")).getImage(), player.getPositionX(), player.getPositionY(), 40, 40, this);
 		g.drawImage(new ImageIcon(getClass().getResource("/img/ballBlack.png")).getImage(), enemy.getPosX(), enemy.getPosY(), 40, 40, this);
 		repaint();
 	}

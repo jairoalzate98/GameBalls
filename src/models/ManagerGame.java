@@ -7,11 +7,13 @@ public class ManagerGame implements Runnable{
 	private boolean stop;
 	private Thread thread;
 	private int sleep;
+	private boolean gamePlay;
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
 		player = new Player(widthInitial, heightInitial);
 		enemy = new Enemy(widthInitial, heightInitial);
 		stop = false;
+		gamePlay = true;
 		this.sleep = sleep;
 		thread = new Thread(this);
 		thread.start();
@@ -51,7 +53,23 @@ public class ManagerGame implements Runnable{
 			}
 			moveEnemyInX();
 			moveEnemyInY();
+			verifyGameOver();
 		}
+	}
+
+	private void verifyGameOver() {
+		if (Math.abs(player.getPositionX() - enemy.getPosX()) < 25 && Math.abs(player.getPositionY() - enemy.getPosY()) < 25) {
+			stop = true;
+			gamePlay = false;
+		}
+	}
+
+	public boolean isGamePlay() {
+		return gamePlay;
+	}
+
+	public void setGamePlay(boolean gamePlay) {
+		this.gamePlay = gamePlay;
 	}
 
 	private void moveEnemyInY() {

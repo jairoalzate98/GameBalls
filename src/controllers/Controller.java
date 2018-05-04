@@ -1,5 +1,7 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -13,54 +15,73 @@ public class Controller implements KeyListener{
 	private MainWindow mainWindow;
 	private ManagerGame managerGame;
 	private Timer timer;
+	private int count;
 	
 	public Controller() {
 		mainWindow = new MainWindow(this);
 		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 20);
 		mainWindow.setPlayer(managerGame.getPlayer());
 		mainWindow.setEnemy(managerGame.getEnemy());
+		start();
 	}
 
-	public Timer getTimer() {
-		return timer;
+	private void start() {
+		timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (managerGame.isGamePlay()) {
+					count++;
+					mainWindow.setLabel(count);
+				}else{
+					timer.stop();
+				}
+			}
+		});
+		timer.start();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
-			moveUp();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
-			moveDown();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
-			moveRight();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
-			moveLeft();
+		if (managerGame.isGamePlay()) {
+			if (KeyEvent.VK_UP == e.getKeyCode()) {
+				moveUp();
+			}else if(KeyEvent.VK_DOWN == e.getKeyCode()){
+				moveDown();
+			}else if(KeyEvent.VK_RIGHT == e.getKeyCode()){
+				moveRight();
+			}else if(KeyEvent.VK_LEFT == e.getKeyCode()){
+				moveLeft();
+			}
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
-			moveUp();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
-			moveDown();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
-			moveRight();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
-			moveLeft();
+		if (managerGame.isGamePlay()) {
+			if (KeyEvent.VK_UP == e.getKeyCode()) {
+				moveUp();
+			}else if(KeyEvent.VK_DOWN == e.getKeyCode()){
+				moveDown();
+			}else if(KeyEvent.VK_RIGHT == e.getKeyCode()){
+				moveRight();
+			}else if(KeyEvent.VK_LEFT == e.getKeyCode()){
+				moveLeft();
+			}
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
-			moveUp();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
-			moveDown();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
-			moveRight();
-		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
-			moveLeft();
+		if (managerGame.isGamePlay()) {
+			if (KeyEvent.VK_UP == e.getKeyCode()) {
+				moveUp();
+			}else if(KeyEvent.VK_DOWN == e.getKeyCode()){
+				moveDown();
+			}else if(KeyEvent.VK_RIGHT == e.getKeyCode()){
+				moveRight();
+			}else if(KeyEvent.VK_LEFT == e.getKeyCode()){
+				moveLeft();
+			}
 		}
 	}
 
