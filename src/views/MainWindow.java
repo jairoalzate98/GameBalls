@@ -51,9 +51,11 @@ public class MainWindow extends JFrame {
 		jPanelGame.setEnemy(enemy);
 	}
 	
-	public void gameOver(){
+	public void gameOver(String count){
 		remove(jPanelGame);
+		remove(jlTime);
 		jPanelGameOver = new JPanelGameOver();
+		jPanelGameOver.setSeconds(count);
 		add(jPanelGameOver, BorderLayout.CENTER);
 		revalidate();
 		repaint();

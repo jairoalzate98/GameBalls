@@ -34,7 +34,7 @@ public class Controller implements KeyListener{
 					mainWindow.setLabel(count);
 				}else{
 					timer.stop();
-					mainWindow.gameOver();
+					mainWindow.gameOver(String.valueOf(count));
 				}
 			}
 		});
