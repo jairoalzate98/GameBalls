@@ -19,7 +19,7 @@ public class Controller implements KeyListener{
 	
 	public Controller() {
 		mainWindow = new MainWindow(this);
-		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 20);
+		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 10);
 		mainWindow.setPlayer(managerGame.getPlayer());
 		mainWindow.setEnemy(managerGame.getEnemy());
 		start();
@@ -34,6 +34,7 @@ public class Controller implements KeyListener{
 					mainWindow.setLabel(count);
 				}else{
 					timer.stop();
+					mainWindow.gameOver();
 				}
 			}
 		});

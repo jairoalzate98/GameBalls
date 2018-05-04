@@ -12,6 +12,8 @@ import models.Player;
 public class JPanelGame extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private ImageIcon jerry = new ImageIcon(getClass().getResource("/img/jerry.png"));
+	private ImageIcon tom = new ImageIcon(getClass().getResource("/img/tom.png"));
 	private Player player;
 	private Enemy enemy;
 	
@@ -31,8 +33,10 @@ public class JPanelGame extends JPanel {
 	public void paint(Graphics g) {
 		removeAll();
 		super.paint(g);
-		g.drawImage(new ImageIcon(getClass().getResource("/img/persona.png")).getImage(), player.getPositionX(), player.getPositionY(), 40, 40, this);
-		g.drawImage(new ImageIcon(getClass().getResource("/img/ballBlack.png")).getImage(), enemy.getPosX(), enemy.getPosY(), 40, 40, this);
+		g.drawImage(jerry.getImage(), player.getPositionX(), player.getPositionY(), 70, 70, this);
+		g.drawRect(player.getPositionX(), player.getPositionY(), 70, 70);
+		g.drawImage(tom.getImage(), enemy.getPosX(), enemy.getPosY(), 100, 100, this);
+		g.drawRect(enemy.getPosX(), enemy.getPosY(), 100, 100);
 		repaint();
 	}
 }

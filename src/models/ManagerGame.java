@@ -1,5 +1,7 @@
 package models;
 
+import java.awt.Rectangle;
+
 public class ManagerGame implements Runnable{
 	
 	private Player player;
@@ -58,10 +60,21 @@ public class ManagerGame implements Runnable{
 	}
 
 	private void verifyGameOver() {
-		if (Math.abs(player.getPositionX() - enemy.getPosX()) < 25 && Math.abs(player.getPositionY() - enemy.getPosY()) < 25) {
+		Rectangle recPlayer = new Rectangle(player.getPositionX(), player.getPositionY(), player.getWidhtPlayer(), player.getHeightPlayer());
+		Rectangle recEnemy = new Rectangle(enemy.getPosX(), enemy.getPosY(), enemy.getWidhtPlayer(), enemy.getHeightPlayer());
+		if (recPlayer.intersects(recEnemy)) {
 			stop = true;
 			gamePlay = false;
 		}
+//		if(((player.getPositionX() > enemy.getPosX()) && player.getPositionX() < (enemy.getPosX() + enemy.getWidhtPlayer()) || 
+//				((player.getPositionX() + player.getWidhtPlayer()) > enemy.getPosX()) && (player.getPositionX() + player.getWidhtPlayer() < 
+//						enemy.getPosX() + enemy.getWidhtPlayer())) && 
+//							((player.getPositionY() > enemy.getPosY()) && player.getPositionY() < 
+//								(enemy.getPosY() + enemy.getHeightPlayer()) || ((player.getPositionY() + player.getHeightPlayer()) > 
+//								enemy.getPosY()) && (player.getPositionY() + player.getHeightPlayer() < enemy.getPosY() + enemy.getHeightPlayer()))){
+//			stop = true;
+//			gamePlay = false;
+//		}
 	}
 
 	public boolean isGamePlay() {

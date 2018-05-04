@@ -17,13 +17,14 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanelGame jPanelGame;
 	private JLabel jlTime;
+	private JPanelGameOver jPanelGameOver;
 
 	public MainWindow(Controller controller) {
-		setTitle("Game");
+		setTitle("Tom y Jerry");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setExtendedState(MAXIMIZED_BOTH);
 		setBackground(Color.WHITE);
-		setIconImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage());
+		setIconImage(new ImageIcon(getClass().getResource("/img/icono.png")).getImage());
 		jPanelGame = new JPanelGame();
 		jPanelGame.setFocusable(true);
 		jPanelGame.addKeyListener(controller);
@@ -48,5 +49,13 @@ public class MainWindow extends JFrame {
 
 	public void setEnemy(Enemy enemy) {
 		jPanelGame.setEnemy(enemy);
+	}
+	
+	public void gameOver(){
+		remove(jPanelGame);
+		jPanelGameOver = new JPanelGameOver();
+		add(jPanelGameOver, BorderLayout.CENTER);
+		revalidate();
+		repaint();
 	}
 }
