@@ -10,8 +10,8 @@ public class Enemy{
 	private int heightPlayer;
 	
 	public Enemy(int width, int height) {
-		posX = 0;
-		posY = 0;
+		posX = (int) (Math.random()* width);
+		posY = (int) (Math.random()* height);
 		this.width = width;
 		this.height = height;
 		this.widhtPlayer = 100;

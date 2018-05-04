@@ -1,11 +1,12 @@
 package models;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class ManagerGame implements Runnable{
 	
 	private Player player;
-	private Enemy enemy;
+	private ArrayList<Enemy> enemyList;
 	private boolean stop;
 	private Thread thread;
 	private int sleep;
@@ -13,7 +14,10 @@ public class ManagerGame implements Runnable{
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
 		player = new Player(widthInitial, heightInitial);
-		enemy = new Enemy(widthInitial, heightInitial);
+		enemyList = new ArrayList<>();
+		for (int i = 0; i < 2; i++) {
+			enemyList.add(new Enemy(widthInitial, heightInitial));
+		}
 		stop = false;
 		gamePlay = true;
 		this.sleep = sleep;
@@ -21,8 +25,8 @@ public class ManagerGame implements Runnable{
 		thread.start();
 	}
 
-	public Enemy getEnemy() {
-		return enemy;
+	public ArrayList<Enemy> getEnemy() {
+		return enemyList;
 	}
 
 	public Player getPlayer() {
@@ -53,32 +57,36 @@ public class ManagerGame implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			moveEnemyInX();
-			moveEnemyInY();
+			for (Enemy enemy : enemyList) {
+				moveEnemyInX(enemy);
+				moveEnemyInY(enemy);
+			}
 			verifyGameOver();
 		}
 	}
 
 	private void verifyGameOver() {
 		Rectangle recPlayer = new Rectangle(player.getPositionX(), player.getPositionY(), player.getWidhtPlayer(), player.getHeightPlayer());
-		Rectangle recEnemy = new Rectangle(enemy.getPosX(), enemy.getPosY(), enemy.getWidhtPlayer(), enemy.getHeightPlayer());
-		if (recPlayer.intersects(recEnemy)) {
-			stop = true;
-			gamePlay = false;
+		for (Enemy enemy2 : enemyList) {
+			Rectangle recEnemy = new Rectangle(enemy2.getPosX(), enemy2.getPosY(), enemy2.getWidhtPlayer(), enemy2.getHeightPlayer());
+			if (recPlayer.intersects(recEnemy)) {
+				stop = true;
+				gamePlay = false;
+			}
 		}
 	}
 	
-	public void verifyGameOverTwo(){
-		if(((player.getPositionX() > enemy.getPosX()) && player.getPositionX() < (enemy.getPosX() + enemy.getWidhtPlayer()) || 
-		((player.getPositionX() + player.getWidhtPlayer()) > enemy.getPosX()) && (player.getPositionX() + player.getWidhtPlayer() < 
-				enemy.getPosX() + enemy.getWidhtPlayer())) && 
-					((player.getPositionY() > enemy.getPosY()) && player.getPositionY() < 
-						(enemy.getPosY() + enemy.getHeightPlayer()) || ((player.getPositionY() + player.getHeightPlayer()) > 
-						enemy.getPosY()) && (player.getPositionY() + player.getHeightPlayer() < enemy.getPosY() + enemy.getHeightPlayer()))){
-			stop = true;
-			gamePlay = false;
-		}
-	}
+//	public void verifyGameOverTwo(){
+//		if(((player.getPositionX() > enemy.getPosX()) && player.getPositionX() < (enemy.getPosX() + enemy.getWidhtPlayer()) || 
+//		((player.getPositionX() + player.getWidhtPlayer()) > enemy.getPosX()) && (player.getPositionX() + player.getWidhtPlayer() < 
+//				enemy.getPosX() + enemy.getWidhtPlayer())) && 
+//					((player.getPositionY() > enemy.getPosY()) && player.getPositionY() < 
+//						(enemy.getPosY() + enemy.getHeightPlayer()) || ((player.getPositionY() + player.getHeightPlayer()) > 
+//						enemy.getPosY()) && (player.getPositionY() + player.getHeightPlayer() < enemy.getPosY() + enemy.getHeightPlayer()))){
+//			stop = true;
+//			gamePlay = false;
+//		}
+//	}
 
 	public boolean isGamePlay() {
 		return gamePlay;
@@ -88,19 +96,19 @@ public class ManagerGame implements Runnable{
 		this.gamePlay = gamePlay;
 	}
 
-	private void moveEnemyInY() {
-		if (player.getPositionY() > enemy.getPosY()) {
-			enemy.setPosY(enemy.getPosY() + 1);
+	private void moveEnemyInY(Enemy e) {
+		if (player.getPositionY() > e.getPosY()) {
+			e.setPosY(e.getPosY() + 1);
 		}else{
-			enemy.setPosY(enemy.getPosY() - 1);
+			e.setPosY(e.getPosY() - 1);
 		}
 	}
 
-	private void moveEnemyInX() {
-		if (player.getPositionX() > enemy.getPosX()) {
-			enemy.setPosX(enemy.getPosX() + 1);
+	private void moveEnemyInX(Enemy e) {
+		if (player.getPositionX() > e.getPosX()) {
+			e.setPosX(e.getPosX() + 1);
 		}else{
-			enemy.setPosX(enemy.getPosX() - 1);
+			e.setPosX(e.getPosX() - 1);
 		}
 	}
 }

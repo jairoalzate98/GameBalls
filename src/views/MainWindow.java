@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -47,7 +48,7 @@ public class MainWindow extends JFrame {
 		return new int[]{getWidth(), getHeight()};
 	}
 
-	public void setEnemy(Enemy enemy) {
+	public void setEnemy(ArrayList<Enemy> enemy) {
 		jPanelGame.setEnemy(enemy);
 	}
 	
