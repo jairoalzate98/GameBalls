@@ -1,5 +1,7 @@
 package models;
 
+import views.JPanelGame;
+
 public class Player {
 
 	private int positionX;
@@ -14,8 +16,8 @@ public class Player {
 		this.height = height;
 		this.positionX = widht / 2;
 		this.positionY = height / 2;
-		this.widhtPlayer = 70;
-		this.heightPlayer = 70;
+		this.widhtPlayer = JPanelGame.SIZE_JERRY;
+		this.heightPlayer = JPanelGame.SIZE_JERRY;
 	}
 	
 	public int getWidhtPlayer() {

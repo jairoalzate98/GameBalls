@@ -1,5 +1,7 @@
 package models;
 
+import views.JPanelGame;
+
 public class Enemy{
 	
 	private int posX;
@@ -14,8 +16,8 @@ public class Enemy{
 		posY = (int) (Math.random()* height);
 		this.width = width;
 		this.height = height;
-		this.widhtPlayer = 100;
-		this.heightPlayer = 100;
+		this.widhtPlayer = JPanelGame.SIZE_TOM;
+		this.heightPlayer = JPanelGame.SIZE_TOM;
 	}
 
 	public int getWidhtPlayer() {
