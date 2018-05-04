@@ -66,15 +66,18 @@ public class ManagerGame implements Runnable{
 			stop = true;
 			gamePlay = false;
 		}
-//		if(((player.getPositionX() > enemy.getPosX()) && player.getPositionX() < (enemy.getPosX() + enemy.getWidhtPlayer()) || 
-//				((player.getPositionX() + player.getWidhtPlayer()) > enemy.getPosX()) && (player.getPositionX() + player.getWidhtPlayer() < 
-//						enemy.getPosX() + enemy.getWidhtPlayer())) && 
-//							((player.getPositionY() > enemy.getPosY()) && player.getPositionY() < 
-//								(enemy.getPosY() + enemy.getHeightPlayer()) || ((player.getPositionY() + player.getHeightPlayer()) > 
-//								enemy.getPosY()) && (player.getPositionY() + player.getHeightPlayer() < enemy.getPosY() + enemy.getHeightPlayer()))){
-//			stop = true;
-//			gamePlay = false;
-//		}
+	}
+	
+	public void verifyGameOverTwo(){
+		if(((player.getPositionX() > enemy.getPosX()) && player.getPositionX() < (enemy.getPosX() + enemy.getWidhtPlayer()) || 
+		((player.getPositionX() + player.getWidhtPlayer()) > enemy.getPosX()) && (player.getPositionX() + player.getWidhtPlayer() < 
+				enemy.getPosX() + enemy.getWidhtPlayer())) && 
+					((player.getPositionY() > enemy.getPosY()) && player.getPositionY() < 
+						(enemy.getPosY() + enemy.getHeightPlayer()) || ((player.getPositionY() + player.getHeightPlayer()) > 
+						enemy.getPosY()) && (player.getPositionY() + player.getHeightPlayer() < enemy.getPosY() + enemy.getHeightPlayer()))){
+			stop = true;
+			gamePlay = false;
+		}
 	}
 
 	public boolean isGamePlay() {

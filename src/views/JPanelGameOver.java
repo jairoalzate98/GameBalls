@@ -1,11 +1,9 @@
 package views;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class JPanelGameOver extends JPanel {
