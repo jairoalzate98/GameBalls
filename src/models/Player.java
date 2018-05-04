@@ -4,10 +4,14 @@ public class Player {
 
 	private int positionX;
 	private int positionY;
+	private int widht;
+	private int height;
 	
-	public Player(int positionX, int positionY) {
-		this.positionX = positionX;
-		this.positionY = positionY;
+	public Player(int widht, int height) {
+		this.widht = widht;
+		this.height = height;
+		this.positionX = widht / 2;
+		this.positionY = height / 2;
 	}
 	
 	public int getPositionX() {
@@ -17,19 +21,35 @@ public class Player {
 		return positionY;
 	}
 	
+	public int getWidht() {
+		return widht;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
 	public void moveUp(){
-		positionY--;
+		if (positionY > 0) {
+			positionY--;
+		}
 	}
 	
 	public void moveDown(){
-		positionY++;
+		if (positionY < (height - 75)) {
+			positionY++;
+		}
 	}
 	
 	public void moveRight(){
-		positionX++;
+		if (positionX < (widht - 50)) {
+			positionX++;
+		}
 	}
 	
 	public void moveLeft(){
-		positionX--;
+		if (positionX > 0) {
+			positionX--;
+		}
 	}
 }

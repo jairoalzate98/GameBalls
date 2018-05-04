@@ -19,14 +19,65 @@ public class Controller implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
+			moveUp();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
+			moveDown();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
+			moveRight();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
+			moveLeft();
+		}
+		mainWindow.setPlayer(managerGame.getPlayer());
+		mainWindow.revalidate();
+		mainWindow.repaint();
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
+			moveUp();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
+			moveDown();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
+			moveRight();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
+			moveLeft();
+		}
+		mainWindow.setPlayer(managerGame.getPlayer());
+		mainWindow.revalidate();
+		mainWindow.repaint();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
+		if (KeyEvent.getKeyText(e.getKeyCode()) == "Arriba") {
+			moveUp();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Abajo"){
+			moveDown();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Derecha"){
+			moveRight();
+		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
+			moveLeft();
+		}
+		mainWindow.setPlayer(managerGame.getPlayer());
+		mainWindow.revalidate();
+		mainWindow.repaint();
+	}
+
+	private void moveLeft() {
+		managerGame.moveLeft();
+	}
+
+	private void moveRight() {
+		managerGame.moveRight();
+	}
+
+	private void moveDown() {
+		managerGame.moveDown();
+	}
+
+	private void moveUp() {
+		managerGame.moveUp();
 	}
 }

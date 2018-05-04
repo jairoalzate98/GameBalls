@@ -1,7 +1,9 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import controllers.Controller;
@@ -16,6 +18,8 @@ public class MainWindow extends JFrame {
 		setTitle("Game");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setExtendedState(MAXIMIZED_BOTH);
+		setBackground(Color.WHITE);
+		setIconImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage());
 		jPanelGame = new JPanelGame();
 		jPanelGame.setFocusable(true);
 		jPanelGame.addKeyListener(controller);
@@ -25,5 +29,9 @@ public class MainWindow extends JFrame {
 	
 	public void setPlayer(Player player){
 		jPanelGame.setPlayer(player);
+	}
+	
+	public int[] getSizePanel(){
+		return new int[]{getWidth(), getHeight()};
 	}
 }
