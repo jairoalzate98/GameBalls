@@ -3,6 +3,8 @@ package controllers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.Timer;
+
 import models.ManagerGame;
 import views.MainWindow;
 
@@ -10,11 +12,17 @@ public class Controller implements KeyListener{
 
 	private MainWindow mainWindow;
 	private ManagerGame managerGame;
+	private Timer timer;
 	
 	public Controller() {
 		mainWindow = new MainWindow(this);
-		managerGame = new ManagerGame(mainWindow.getWidth(), mainWindow.getHeight());
+		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 20);
 		mainWindow.setPlayer(managerGame.getPlayer());
+		mainWindow.setEnemy(managerGame.getEnemy());
+	}
+
+	public Timer getTimer() {
+		return timer;
 	}
 
 	@Override
@@ -28,9 +36,6 @@ public class Controller implements KeyListener{
 		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
 			moveLeft();
 		}
-		mainWindow.setPlayer(managerGame.getPlayer());
-		mainWindow.revalidate();
-		mainWindow.repaint();
 	}
 
 	@Override
@@ -44,9 +49,6 @@ public class Controller implements KeyListener{
 		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
 			moveLeft();
 		}
-		mainWindow.setPlayer(managerGame.getPlayer());
-		mainWindow.revalidate();
-		mainWindow.repaint();
 	}
 
 	@Override
@@ -60,9 +62,6 @@ public class Controller implements KeyListener{
 		}else if(KeyEvent.getKeyText(e.getKeyCode()) == "Izquierda"){
 			moveLeft();
 		}
-		mainWindow.setPlayer(managerGame.getPlayer());
-		mainWindow.revalidate();
-		mainWindow.repaint();
 	}
 
 	private void moveLeft() {

@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import controllers.Controller;
+import models.Enemy;
 import models.Player;
 
 public class MainWindow extends JFrame {
@@ -33,5 +34,9 @@ public class MainWindow extends JFrame {
 	
 	public int[] getSizePanel(){
 		return new int[]{getWidth(), getHeight()};
+	}
+
+	public void setEnemy(Enemy enemy) {
+		jPanelGame.setEnemy(enemy);
 	}
 }

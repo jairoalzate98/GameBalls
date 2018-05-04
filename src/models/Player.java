@@ -31,25 +31,25 @@ public class Player {
 
 	public void moveUp(){
 		if (positionY > 0) {
-			positionY--;
+			positionY -= 2;
 		}
 	}
 	
 	public void moveDown(){
 		if (positionY < (height - 75)) {
-			positionY++;
+			positionY += 2;
 		}
 	}
 	
 	public void moveRight(){
 		if (positionX < (widht - 50)) {
-			positionX++;
+			positionX += 2;
 		}
 	}
 	
 	public void moveLeft(){
 		if (positionX > 0) {
-			positionX--;
+			positionX -= 2;
 		}
 	}
 }
