@@ -21,6 +21,7 @@ public class MainWindow extends JFrame {
 	private JPanelGame jPanelGame;
 	private JLabel jlTime;
 	private JPanelGameOver jPanelGameOver;
+	private JPanelVictory jPanelVictory;
 
 	public MainWindow(Controller controller) {
 		setTitle("Tom y Jerry");
@@ -64,6 +65,16 @@ public class MainWindow extends JFrame {
 		jPanelGameOver = new JPanelGameOver();
 		jPanelGameOver.setSeconds(count);
 		add(jPanelGameOver, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
+	public void victory(String count){
+		remove(jPanelGame);
+		remove(jlTime);
+		jPanelVictory = new JPanelVictory();
+		jPanelVictory.setSeconds(count);
+		add(jPanelVictory, BorderLayout.CENTER);
 		revalidate();
 		repaint();
 	}

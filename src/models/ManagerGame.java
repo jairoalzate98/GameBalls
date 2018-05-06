@@ -18,6 +18,7 @@ public class ManagerGame implements Runnable{
 	private ArrayList<Shooting> shootList;
 	private Boos boos;
 	private boolean boosActive;
+	private boolean victory;
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
 		shootList = new ArrayList<>();
@@ -108,10 +109,16 @@ public class ManagerGame implements Runnable{
 				Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
 				if (shoot.intersects(b)) {
 					boos = null;
+					victory = true;
+					stop = false;
 					return;
 				}
 			}
 		}
+	}
+
+	public boolean isVictory() {
+		return victory;
 	}
 
 	private void verifyBoos() {

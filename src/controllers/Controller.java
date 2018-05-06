@@ -36,7 +36,7 @@ public class Controller implements KeyListener{
 		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (managerGame.isGamePlay()) {
+				if (managerGame.isGamePlay() && !managerGame.isVictory()) {
 					if (count == 100) {
 						i++;
 						count = 0;
@@ -45,8 +45,13 @@ public class Controller implements KeyListener{
 					mainWindow.setInformation(managerGame.getPlayer(), managerGame.getEnemy(), managerGame.getShootList(), managerGame.getBoos());
 					count++;
 				}else{
-					timer.stop();
-					mainWindow.gameOver(String.valueOf(i));
+					if (!managerGame.isGamePlay()) {
+						timer.stop();
+						mainWindow.gameOver(String.valueOf(i));
+					}else if(managerGame.isVictory()){
+						timer.stop();
+						mainWindow.victory(String.valueOf(i));
+					}
 				}
 			}
 		});
