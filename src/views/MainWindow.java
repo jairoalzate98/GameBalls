@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import controllers.Controller;
+import models.Boos;
 import models.Enemy;
 import models.Player;
 import models.Shooting;
@@ -67,10 +68,15 @@ public class MainWindow extends JFrame {
 		repaint();
 	}
 
-	public void setInformation(Player player, ArrayList<Enemy> enemy, ArrayList<Shooting> shootList) {
+	public void setInformation(Player player, ArrayList<Enemy> enemy, ArrayList<Shooting> shootList, Boos boos) {
 		jPanelGame.setPlayer(player);
 		jPanelGame.setEnemy(enemy);
 		jPanelGame.setShootingList(shootList);
+		jPanelGame.setBoos(boos);
 		jPanelGame.repaint();
+	}
+	
+	public void setBoos(Boos boos){
+		jPanelGame.setBoos(boos);
 	}
 }

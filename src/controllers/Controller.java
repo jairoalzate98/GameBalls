@@ -24,6 +24,11 @@ public class Controller implements KeyListener{
 		mainWindow.setPlayer(managerGame.getPlayer());
 		mainWindow.setEnemy(managerGame.getEnemy());
 		mainWindow.setShoot(managerGame.getShootList());
+		try{
+			mainWindow.setBoos(managerGame.getBoos());			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		start();
 	}
 
@@ -37,7 +42,7 @@ public class Controller implements KeyListener{
 						count = 0;
 						mainWindow.setLabel(i);
 					}
-					mainWindow.setInformation(managerGame.getPlayer(), managerGame.getEnemy(), managerGame.getShootList());
+					mainWindow.setInformation(managerGame.getPlayer(), managerGame.getEnemy(), managerGame.getShootList(), managerGame.getBoos());
 					count++;
 				}else{
 					timer.stop();

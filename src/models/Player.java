@@ -20,6 +20,14 @@ public class Player {
 		this.heightPlayer = JPanelGame.SIZE_JERRY;
 	}
 	
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
 	public int getWidhtPlayer() {
 		return widhtPlayer;
 	}

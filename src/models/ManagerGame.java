@@ -16,6 +16,7 @@ public class ManagerGame implements Runnable{
 	private int sleep;
 	private boolean gamePlay;
 	private ArrayList<Shooting> shootList;
+	private Boos boos;
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
 		shootList = new ArrayList<>();
@@ -93,6 +94,48 @@ public class ManagerGame implements Runnable{
 			}
 			verifyGameOver();
 			verifyDeadTom();
+			verifyShoot();
+			verifyBoos();
+		}
+	}
+
+	private void verifyBoos() {
+		if (enemyList.isEmpty()) {
+			if (boos == null) {
+				boos = new Boos(player.getWidth(), player.getHeight());
+			}else {
+				moveBoosInX(boos);
+				moveBoosInY(boos);
+			}
+		}
+	}
+	
+	public Boos getBoos() {
+		return boos;
+	}
+
+	private void moveBoosInY(Boos e) {
+		if (player.getPositionY() > e.getPosY()) {
+			e.setPosY(e.getPosY() + 1);
+		}else{
+			e.setPosY(e.getPosY() - 1);
+		}
+	}
+
+	private void moveBoosInX(Boos e) {
+		if (player.getPositionX() > e.getPosX()) {
+			e.setPosX(e.getPosX() + 1);
+		}else{
+			e.setPosX(e.getPosX() - 1);
+		}
+	}
+
+	private void verifyShoot() {
+		for (Shooting shoot : shootList) {
+			if (shoot.getPosX() < 5 || shoot.getPosY() < 5 || shoot.getPosX() == shoot.getWidth() || shoot.getPosY() == shoot.getHeight()) {
+				shootList.remove(shoot);
+				return;
+			}
 		}
 	}
 
@@ -105,11 +148,6 @@ public class ManagerGame implements Runnable{
 					enemyList.remove(enemy);
 					shootList.remove(shoot);
 					return;
-				}else{
-					if (shoot.getPosX() < 5 || shoot.getPosY() < 5 || shoot.getPosX() == shoot.getWidth() || shoot.getPosY() == shoot.getHeight()) {
-						shootList.remove(shoot);
-						return;
-					}
 				}
 			}
 		}
@@ -117,9 +155,17 @@ public class ManagerGame implements Runnable{
 
 	private void verifyGameOver() {
 		Rectangle recPlayer = new Rectangle(player.getPositionX(), player.getPositionY(), player.getWidhtPlayer(), player.getHeightPlayer());
-		for (Enemy enemy2 : enemyList) {
-			Rectangle recEnemy = new Rectangle(enemy2.getPosX(), enemy2.getPosY(), enemy2.getWidhtPlayer(), enemy2.getHeightPlayer());
-			if (recPlayer.intersects(recEnemy)) {
+		if (!enemyList.isEmpty()) {
+			for (Enemy enemy2 : enemyList) {
+				Rectangle recEnemy = new Rectangle(enemy2.getPosX(), enemy2.getPosY(), enemy2.getWidhtPlayer(), enemy2.getHeightPlayer());
+				if (recPlayer.intersects(recEnemy)) {
+					stop = true;
+					gamePlay = false;
+				}
+			}
+		}else{
+			Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
+			if (recPlayer.intersects(b)) {
 				stop = true;
 				gamePlay = false;
 			}

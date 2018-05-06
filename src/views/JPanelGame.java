@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import models.Boos;
 import models.Enemy;
 import models.Player;
 import models.Shooting;
@@ -16,13 +17,16 @@ public class JPanelGame extends JPanel {
 	public static final int SIZE_TOM = 90;
 	public static final int SIZE_JERRY = 63;
 	public static final int SIZE_SHOOT = 40;
+	public static final int SIZE_BOOS = 200;
 	private static final long serialVersionUID = 1L;
 	private ImageIcon jerry = new ImageIcon(getClass().getResource("/img/jerry.png"));
 	private ImageIcon tom = new ImageIcon(getClass().getResource("/img/tom.png"));
 	private ImageIcon bullet = new ImageIcon(getClass().getResource("/img/bullet.png"));
+	private ImageIcon bossImage = new ImageIcon(getClass().getResource("/img/boss.png"));
 	private Player player;
 	private ArrayList<Enemy> enemy;
 	private ArrayList<Shooting> shootingList;
+	private Boos boos;
 	
 	public JPanelGame() {
 		setBackground(Color.WHITE);
@@ -38,8 +42,13 @@ public class JPanelGame extends JPanel {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+		removeAll();
 	}
 	
+	public void setBoos(Boos boos) {
+		this.boos = boos;
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -51,6 +60,10 @@ public class JPanelGame extends JPanel {
 		}
 		for (Shooting shoot : shootingList) {
 			g.drawImage(bullet.getImage(), shoot.getPosX(), shoot.getPosY(), shoot.getWidhtShoot(), shoot.getHeightShoot(), this);
+		}
+		if (boos != null) {
+			g.drawImage(bossImage.getImage(), boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer(), this);
+			g.drawRect(boos.getPosX(), boos.getPosY(), SIZE_BOOS, SIZE_BOOS);
 		}
 	}
 }
