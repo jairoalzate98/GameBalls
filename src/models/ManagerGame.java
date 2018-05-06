@@ -2,6 +2,7 @@ package models;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ManagerGame implements Runnable{
 	
@@ -92,6 +93,21 @@ public class ManagerGame implements Runnable{
 				}
 			}
 			verifyGameOver();
+			verifyDeadTom();
+		}
+	}
+
+	private void verifyDeadTom() {
+		for (Enemy enemy : enemyList) {
+			Rectangle e = new Rectangle(enemy.getPosX(), enemy.getPosY(), enemy.getWidhtPlayer(), enemy.getHeightPlayer());
+			for (Shooting shoot : shootList) {
+				Rectangle s = new Rectangle(shoot.getPosX(), shoot.getPosY(), shoot.getWidhtShoot(), shoot.getHeightShoot());
+				if (e.intersects(s)) {
+					enemyList.remove(enemy);
+					shootList.remove(shoot);
+					return;
+				}
+			}
 		}
 	}
 
