@@ -6,16 +6,16 @@ public class Player {
 
 	private int positionX;
 	private int positionY;
-	private int widht;
-	private int height;
 	private int widhtPlayer;
 	private int heightPlayer;
+	private int width;
+	private int height;
 	
-	public Player(int widht, int height) {
-		this.widht = widht;
+	public Player(int width, int height) {
+		this.width = width;
 		this.height = height;
-		this.positionX = widht / 2;
-		this.positionY = height / 2;
+		this.positionX = (int) (Math.random()*width);
+		this.positionY = (int) (Math.random()*height);
 		this.widhtPlayer = JPanelGame.SIZE_JERRY;
 		this.heightPlayer = JPanelGame.SIZE_JERRY;
 	}
@@ -34,14 +34,6 @@ public class Player {
 	public int getPositionY() {
 		return positionY;
 	}
-	
-	public int getWidht() {
-		return widht;
-	}
-
-	public int getHeight() {
-		return height;
-	}
 
 	public void moveUp(){
 		if (positionY > 0) {
@@ -56,7 +48,7 @@ public class Player {
 	}
 	
 	public void moveRight(){
-		if (positionX < (widht - 50)) {
+		if (positionX < (width - 50)) {
 			positionX += 8;
 		}
 	}

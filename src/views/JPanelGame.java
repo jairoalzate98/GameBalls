@@ -9,21 +9,29 @@ import javax.swing.JPanel;
 
 import models.Enemy;
 import models.Player;
+import models.Shooting;
 
 public class JPanelGame extends JPanel {
 
 	public static final int SIZE_TOM = 90;
 	public static final int SIZE_JERRY = 63;
+	public static final int SIZE_SHOOT = 40;
 	private static final long serialVersionUID = 1L;
 	private ImageIcon jerry = new ImageIcon(getClass().getResource("/img/jerry.png"));
 	private ImageIcon tom = new ImageIcon(getClass().getResource("/img/tom.png"));
+	private ImageIcon bullet = new ImageIcon(getClass().getResource("/img/bullet.png"));
 	private Player player;
 	private ArrayList<Enemy> enemy;
+	private ArrayList<Shooting> shootingList;
 	
 	public JPanelGame() {
 		setBackground(Color.WHITE);
 	}
 	
+	public void setShootingList(ArrayList<Shooting> shootingList) {
+		this.shootingList = shootingList;
+	}
+
 	public void setEnemy(ArrayList<Enemy> enemy) {
 		this.enemy = enemy;
 	}
@@ -34,7 +42,6 @@ public class JPanelGame extends JPanel {
 	
 	@Override
 	public void paint(Graphics g) {
-		removeAll();
 		super.paint(g);
 		g.drawImage(jerry.getImage(), player.getPositionX(), player.getPositionY(), SIZE_JERRY, SIZE_JERRY, this);
 		g.drawRect(player.getPositionX(), player.getPositionY(), SIZE_JERRY, SIZE_JERRY);
@@ -42,6 +49,8 @@ public class JPanelGame extends JPanel {
 			g.drawImage(tom.getImage(), enemy2.getPosX(), enemy2.getPosY(), SIZE_TOM, SIZE_TOM, this);
 			g.drawRect(enemy2.getPosX(), enemy2.getPosY(), SIZE_TOM, SIZE_TOM);
 		}
-		repaint();
+		for (Shooting shoot : shootingList) {
+			g.drawImage(bullet.getImage(), shoot.getPosX(), shoot.getPosY(), shoot.getWidhtShoot(), shoot.getHeightShoot(), this);
+		}
 	}
 }

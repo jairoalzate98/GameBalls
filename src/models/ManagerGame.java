@@ -5,14 +5,20 @@ import java.util.ArrayList;
 
 public class ManagerGame implements Runnable{
 	
+	public static final String W_LETTER = "w";
+	public static final String S_LETTER = "s";
+	public static final String D_LETTER = "d";
+	public static final String A_LETTER = "a";
 	private Player player;
 	private ArrayList<Enemy> enemyList;
 	private boolean stop;
 	private Thread thread;
 	private int sleep;
 	private boolean gamePlay;
+	private ArrayList<Shooting> shootList;
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
+		shootList = new ArrayList<>();
 		player = new Player(widthInitial, heightInitial);
 		enemyList = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
@@ -23,6 +29,14 @@ public class ManagerGame implements Runnable{
 		this.sleep = sleep;
 		thread = new Thread(this);
 		thread.start();
+	}
+	
+	public void addShooting(Shooting shooting){
+		shootList.add(shooting);
+	}
+
+	public ArrayList<Shooting> getShootList() {
+		return shootList;
 	}
 
 	public ArrayList<Enemy> getEnemy() {
@@ -60,6 +74,22 @@ public class ManagerGame implements Runnable{
 			for (Enemy enemy : enemyList) {
 				moveEnemyInX(enemy);
 				moveEnemyInY(enemy);
+			}
+			for (Shooting shoot : shootList) {
+				switch (shoot.getDirection()) {
+				case W_LETTER:
+					shoot.moveUp();
+					break;
+				case S_LETTER:
+					shoot.moveDown();
+					break;
+				case D_LETTER:
+					shoot.moveRight();
+					break;
+				case A_LETTER: 
+					shoot.moveLeft();
+					break;
+				}
 			}
 			verifyGameOver();
 		}
@@ -110,5 +140,9 @@ public class ManagerGame implements Runnable{
 		}else{
 			e.setPosX(e.getPosX() - 1);
 		}
+	}
+
+	public void shoot(int width, int height, String direction) {
+		addShooting(new Shooting(player.getPositionX(), player.getPositionY(), width, height, direction));
 	}
 }

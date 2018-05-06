@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import controllers.Controller;
 import models.Enemy;
 import models.Player;
+import models.Shooting;
 
 public class MainWindow extends JFrame {
 
@@ -52,6 +53,10 @@ public class MainWindow extends JFrame {
 		jPanelGame.setEnemy(enemy);
 	}
 	
+	public void setShoot(ArrayList<Shooting> shoots){
+		jPanelGame.setShootingList(shoots);
+	}
+	
 	public void gameOver(String count){
 		remove(jPanelGame);
 		remove(jlTime);
@@ -60,5 +65,12 @@ public class MainWindow extends JFrame {
 		add(jPanelGameOver, BorderLayout.CENTER);
 		revalidate();
 		repaint();
+	}
+
+	public void setInformation(Player player, ArrayList<Enemy> enemy, ArrayList<Shooting> shootList) {
+		jPanelGame.setPlayer(player);
+		jPanelGame.setEnemy(enemy);
+		jPanelGame.setShootingList(shootList);
+		jPanelGame.repaint();
 	}
 }
