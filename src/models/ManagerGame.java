@@ -2,7 +2,6 @@ package models;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ManagerGame implements Runnable{
 	
@@ -106,6 +105,11 @@ public class ManagerGame implements Runnable{
 					enemyList.remove(enemy);
 					shootList.remove(shoot);
 					return;
+				}else{
+					if (shoot.getPosX() < 5 || shoot.getPosY() < 5 || shoot.getPosX() == shoot.getWidth() || shoot.getPosY() == shoot.getHeight()) {
+						shootList.remove(shoot);
+						return;
+					}
 				}
 			}
 		}
