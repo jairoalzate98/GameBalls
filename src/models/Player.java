@@ -10,16 +10,38 @@ public class Player {
 	private int heightPlayer;
 	private int width;
 	private int height;
+	private int life;
 	
 	public Player(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.positionX = (int) (Math.random()*width);
-		this.positionY = (int) (Math.random()*height);
+		this.positionX = (int) (Math.random()* width );
+		this.positionY = (int) (Math.random()* (height - 40));
 		this.widhtPlayer = JPanelGame.SIZE_JERRY;
 		this.heightPlayer = JPanelGame.SIZE_JERRY;
+		life = 100;
 	}
 	
+	public int getLife() {
+		return life;
+	}
+
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
+	}
+
+	public void setLifeTom() {
+		life -= 20; 
+	}
+
+	public void setLifeBoos() {
+		life -= 40; 
+	}
+
 	public int getWidth() {
 		return width;
 	}

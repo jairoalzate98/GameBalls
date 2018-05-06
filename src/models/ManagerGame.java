@@ -184,16 +184,30 @@ public class ManagerGame implements Runnable{
 			for (Enemy enemy2 : enemyList) {
 				Rectangle recEnemy = new Rectangle(enemy2.getPosX(), enemy2.getPosY(), enemy2.getWidhtPlayer(), enemy2.getHeightPlayer());
 				if (recPlayer.intersects(recEnemy)) {
-					stop = true;
-					gamePlay = false;
+					player.setLifeTom();
+					if (!(player.getLife() > 0)) {
+						stop = true;
+						gamePlay = false;
+					}else{
+						player.setPositionX((int) (Math.random()*player.getWidth()));
+						player.setPositionY((int) (Math.random()* (player.getHeight() - 40)));
+						return;
+					}
 				}
 			}
 		}else{
 			if (boos != null) {
 				Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
 				if (recPlayer.intersects(b)) {
-					stop = true;
-					gamePlay = false;
+					player.setLifeBoos();
+					if (!(player.getLife() > 0)) {
+						stop = true;
+						gamePlay = false;
+					}else{
+						player.setPositionX((int) (Math.random()*player.getWidth()));
+						player.setPositionY((int) (Math.random()* (player.getHeight() - 40)));
+						return;
+					}
 				}
 			}
 		}

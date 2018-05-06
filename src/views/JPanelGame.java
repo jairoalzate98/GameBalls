@@ -52,6 +52,7 @@ public class JPanelGame extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		g.setColor(Color.BLACK);
 		g.drawImage(jerry.getImage(), player.getPositionX(), player.getPositionY(), SIZE_JERRY, SIZE_JERRY, this);
 		g.drawRect(player.getPositionX(), player.getPositionY(), SIZE_JERRY, SIZE_JERRY);
 		for (Enemy enemy2 : enemy) {
@@ -65,5 +66,10 @@ public class JPanelGame extends JPanel {
 			g.drawImage(bossImage.getImage(), boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer(), this);
 			g.drawRect(boos.getPosX(), boos.getPosY(), SIZE_BOOS, SIZE_BOOS);
 		}
+		g.setFont(JPanelGameOver.FONT_UBUNTU);
+		g.drawString("Life => " + player.getLife() + "%", 20, 20);
+		g.drawRect(20, 40, 120, 40);
+		g.setColor(Color.RED);
+		g.fillRect(30, 45, player.getLife(), 30);
 	}
 }
