@@ -17,6 +17,7 @@ public class ManagerGame implements Runnable{
 	private boolean gamePlay;
 	private ArrayList<Shooting> shootList;
 	private Boos boos;
+	private boolean boosActive;
 
 	public ManagerGame(int widthInitial, int heightInitial, int sleep){
 		shootList = new ArrayList<>();
@@ -96,13 +97,30 @@ public class ManagerGame implements Runnable{
 			verifyDeadTom();
 			verifyShoot();
 			verifyBoos();
+			verifyDeadBoos();
+		}
+	}
+
+	private void verifyDeadBoos() {
+		if (boos != null) {
+			for (Shooting shooting : shootList) {
+				Rectangle shoot = new Rectangle(shooting.getPosX(), shooting.getPosY(), shooting.getWidhtShoot(), shooting.getHeightShoot());
+				Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
+				if (shoot.intersects(b)) {
+					boos = null;
+					return;
+				}
+			}
 		}
 	}
 
 	private void verifyBoos() {
 		if (enemyList.isEmpty()) {
 			if (boos == null) {
-				boos = new Boos(player.getWidth(), player.getHeight());
+				if (!boosActive) {
+					boos = new Boos(player.getWidth(), player.getHeight());
+					boosActive = true;
+				}
 			}else {
 				moveBoosInX(boos);
 				moveBoosInY(boos);
@@ -164,10 +182,12 @@ public class ManagerGame implements Runnable{
 				}
 			}
 		}else{
-			Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
-			if (recPlayer.intersects(b)) {
-				stop = true;
-				gamePlay = false;
+			if (boos != null) {
+				Rectangle b = new Rectangle(boos.getPosX(), boos.getPosY(), boos.getWidhtPlayer(), boos.getHeightPlayer());
+				if (recPlayer.intersects(b)) {
+					stop = true;
+					gamePlay = false;
+				}
 			}
 		}
 	}
