@@ -34,6 +34,36 @@ public class ManagerGame implements Runnable{
 		thread.start();
 	}
 	
+	public ManagerGame(int sleep){
+		shootList = new ArrayList<>();
+		enemyList = new ArrayList<>();
+		this.sleep = sleep;
+		stop = false;
+		gamePlay = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	public int getSleep() {
+		return sleep;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public void setEnemyList(ArrayList<Enemy> enemyList) {
+		this.enemyList = enemyList;
+	}
+
+	public void setSleep(int sleep) {
+		this.sleep = sleep;
+	}
+
+	public void setBoos(Boos boos) {
+		this.boos = boos;
+	}
+
 	public void addShooting(Shooting shooting){
 		shootList.add(shooting);
 	}

@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import models.ManagerGame;
@@ -23,11 +24,28 @@ public class Controller implements KeyListener{
 	private FileManager fileManager;
 	
 	public Controller() {
-		mainWindow = new MainWindow(this);
-		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 10);
 		fileManager = new FileManager();
+		int option = JOptionPane.showConfirmDialog(mainWindow, "Quiere restaurar la ultima partida");
+		if (option == JOptionPane.YES_OPTION) {
+			try {			
+				mainWindow = new MainWindow(this);
+				managerGame = new ManagerGame(10);
+				managerGame.setPlayer(fileManager.readPlayer());
+				managerGame.setEnemyList(fileManager.readEnemys());
+				managerGame.setBoos(fileManager.readBoos());
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+		}else {
+			mainWindow = new MainWindow(this);
+			managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 10);
+		}
 		mainWindow.setPlayer(managerGame.getPlayer());
-		mainWindow.setEnemy(managerGame.getEnemy());
+		try{
+			mainWindow.setEnemy(managerGame.getEnemy());
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		mainWindow.setShoot(managerGame.getShootList());
 		try{
 			mainWindow.setBoos(managerGame.getBoos());			
@@ -44,7 +62,7 @@ public class Controller implements KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					fileManager.writeFileEnemy(managerGame.getEnemy());
-					fileManager.writeFilePlayer(managerGame.getPlayer());
+					fileManager.writeFilePlayer(managerGame.getPlayer(), managerGame.getSleep());
 					fileManager.writeFileBoos(managerGame.getBoos());
 				} catch (IOException e1) {
 					System.out.println(e1.getMessage());

@@ -20,6 +20,15 @@ public class Enemy{
 		this.heightPlayer = JPanelGame.SIZE_TOM;
 	}
 
+	public Enemy(int posX, int posY, int width, int height, int widhtPlayer, int heightPlayer) {
+		this.posX = posX;
+		this.posY = posY;
+		this.width = width;
+		this.height = height;
+		this.widhtPlayer = widhtPlayer;
+		this.heightPlayer = heightPlayer;
+	}
+
 	public int getWidhtPlayer() {
 		return widhtPlayer;
 	}

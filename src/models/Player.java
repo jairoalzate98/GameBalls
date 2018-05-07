@@ -22,6 +22,16 @@ public class Player {
 		life = 100;
 	}
 	
+	public Player(int positionX, int positionY, int widhtPlayer, int heightPlayer, int width, int height, int life) {
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.widhtPlayer = widhtPlayer;
+		this.heightPlayer = heightPlayer;
+		this.width = width;
+		this.height = height;
+		this.life = life;
+	}
+
 	public int getLife() {
 		return life;
 	}
