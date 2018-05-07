@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.Timer;
 
 import models.ManagerGame;
+import persistence.FileManager;
 import views.MainWindow;
 
 public class Controller implements KeyListener{
@@ -17,10 +19,13 @@ public class Controller implements KeyListener{
 	private Timer timer;
 	private int count;
 	private int i = 0;
+	private Timer autoSave;
+	private FileManager fileManager;
 	
 	public Controller() {
 		mainWindow = new MainWindow(this);
 		managerGame = new ManagerGame(mainWindow.getSizePanel()[0], mainWindow.getSizePanel()[1], 10);
+		fileManager = new FileManager();
 		mainWindow.setPlayer(managerGame.getPlayer());
 		mainWindow.setEnemy(managerGame.getEnemy());
 		mainWindow.setShoot(managerGame.getShootList());
@@ -30,6 +35,23 @@ public class Controller implements KeyListener{
 			System.out.println(e.getMessage());
 		}
 		start();
+		autoSave();
+	}
+
+	private void autoSave() {
+		autoSave = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					fileManager.writeFileEnemy(managerGame.getEnemy());
+					fileManager.writeFilePlayer(managerGame.getPlayer());
+					fileManager.writeFileBoos(managerGame.getBoos());
+				} catch (IOException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+		});
+		autoSave.start();
 	}
 
 	private void start() {
@@ -48,9 +70,11 @@ public class Controller implements KeyListener{
 					if (!managerGame.isGamePlay()) {
 						timer.stop();
 						mainWindow.gameOver(String.valueOf(i));
+						autoSave.stop();
 					}else if(managerGame.isVictory()){
 						timer.stop();
 						mainWindow.victory(String.valueOf(i));
+						autoSave.stop();
 					}
 				}
 			}
